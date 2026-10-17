@@ -1,16 +1,33 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class Player_Healt : MonoBehaviour
+public class PlayerHealth : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private int maxHealth = 100;
+    private int currentHealth;
+
+    private void Start()
     {
-        
+        currentHealth = maxHealth;
+        Debug.Log("Vida inicial del jugador: " + currentHealth);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void TakeDamage(int damage)
     {
-        
+        currentHealth -= damage;
+
+        Debug.Log("¡Jugador atacado! Vida restante: " + currentHealth);
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        Debug.Log("¡El jugador ha muerto! Reiniciando nivel...");
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
