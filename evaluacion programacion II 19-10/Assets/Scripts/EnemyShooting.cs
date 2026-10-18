@@ -1,75 +1,108 @@
+
 using UnityEngine;
 
-public class DisparoEnemigo : MonoBehaviour
+public class EnemyShooting : MonoBehaviour
 {
-    [Header("Configuración del disparo")]
-    [SerializeField] private GameObject proyectilPrefab;
-    [SerializeField] private Transform puntoDisparo;
-    [SerializeField] private float velocidadProyectil = 5f;
-    [SerializeField] private float tiempoEntreDisparos = 2f;
+    [Header("Shooting Settings")]
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private Transform shootingPoint;
+    [SerializeField] private float projectileSpeed = 5f;
+    [SerializeField] private int shotsPerBurst = 3;
+    [SerializeField] private float timeBetweenShots = 0.25f;
+    [SerializeField] private float timeBetweenBursts = 2f;
 
-    [Header("Detección del jugador")]
-    [SerializeField] private float distanciaAtaque = 5f;
+    [Header("Player Detection")]
+    [SerializeField] private float attackRange = 5f;
 
-    private Transform jugador;
-    private float temporizador;
+    [Header("Shooting Sound")]
+    [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioClip shootSound;
+
+    private Transform player;
+    private float timer;
+    private int shotsFired;
+    private bool isBursting;
 
     private void Start()
     {
-        GameObject objetoJugador = GameObject.FindGameObjectWithTag("Player");
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
 
-        if (objetoJugador != null)
+        if (playerObject != null)
         {
-            jugador = objetoJugador.transform;
+            player = playerObject.transform;
         }
+
+        timer = timeBetweenBursts;
     }
 
     private void Update()
     {
-        if (jugador == null || proyectilPrefab == null || puntoDisparo == null)
+        if (player == null || projectilePrefab == null || shootingPoint == null)
         {
             return;
         }
 
-        float distancia = Vector2.Distance(transform.position, jugador.position);
+        float distance = Vector2.Distance(transform.position, player.position);
 
-        if (distancia <= distanciaAtaque)
+        if (distance <= attackRange)
         {
-            temporizador += Time.deltaTime;
+            timer += Time.deltaTime;
 
-            if (temporizador >= tiempoEntreDisparos)
+            if (isBursting)
             {
-                Disparar();
-                temporizador = 0f;
+                if (timer >= timeBetweenShots)
+                {
+                    Shoot();
+                    shotsFired++;
+                    timer = 0f;
+
+                    if (shotsFired >= shotsPerBurst)
+                    {
+                        isBursting = false;
+                    }
+                }
+            }
+            else if (timer >= timeBetweenBursts)
+            {
+                isBursting = true;
+                shotsFired = 0;
+                timer = timeBetweenShots;
             }
         }
         else
         {
-            temporizador = 0f;
+            timer = 0f;
+            shotsFired = 0;
+            isBursting = false;
         }
     }
 
-    private void Disparar()
+    private void Shoot()
     {
-        GameObject proyectil = Instantiate(
-            proyectilPrefab,
-            puntoDisparo.position,
+        GameObject projectile = Instantiate(
+            projectilePrefab,
+            shootingPoint.position,
             Quaternion.identity
         );
 
-        Vector2 direccion = (jugador.position - puntoDisparo.position).normalized;
+        Vector2 direction = (player.position - shootingPoint.position).normalized;
 
-        Rigidbody2D rb = proyectil.GetComponent<Rigidbody2D>();
+        Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
 
         if (rb != null)
         {
-            rb.linearVelocity = direccion * velocidadProyectil;
+            rb.linearVelocity = direction * projectileSpeed;
+        }
+
+        if (sfxSource != null && shootSound != null)
+        {
+            sfxSource.PlayOneShot(shootSound);
         }
     }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, distanciaAtaque);
+        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 }

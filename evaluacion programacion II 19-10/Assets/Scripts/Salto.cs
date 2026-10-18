@@ -10,6 +10,8 @@ public class PlayerJump : MonoBehaviour
     public float groundCheckRadius = 0.2f;
 
     [SerializeField] private PlayerAnimations playerAnimations;
+    [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioClip jumpSound;
 
     private bool isGrounded;
 
@@ -32,6 +34,11 @@ public class PlayerJump : MonoBehaviour
                 RigidbodyPlayer.linearVelocity.x,
                 jumpForce
             );
+
+            if (sfxSource != null && jumpSound != null)
+            {
+                sfxSource.PlayOneShot(jumpSound);
+            }
         }
     }
 }

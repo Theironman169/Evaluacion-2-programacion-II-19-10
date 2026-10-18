@@ -1,27 +1,27 @@
+
 using UnityEngine;
+using UnityEngine.Serialization;
+
 public class EnemyPatrol : MonoBehaviour
 {
-    public float velocidad = 2f;
+    [FormerlySerializedAs("velocidad")]
+    public float speed = 2f;
+
     [SerializeField] private SpriteRenderer sprite;
 
-    // Empezamos moviéndonos a la izquierda (-1). Para la derecha sería 1.
-    private int direccion = 1;
-    void Update()
+    private int direction = 1;
+
+    private void Update()
     {
-        // Movemos al enemigo en el eje X constantemente
-        transform.Translate(new Vector2(direccion * velocidad * Time.deltaTime, 0));
+        transform.Translate(new Vector2(direction * speed * Time.deltaTime, 0));
     }
-    // Usamos las colisiones físicas para rebotar en paredes
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // Si choca con algo y ese algo NO es el jugador...
-        if (collision.gameObject.CompareTag("Player") == false)
+        if (!collision.gameObject.CompareTag("Player"))
         {
-            // Invertimos la dirección (de -1 a 1, o de 1 a -1)
-            direccion = direccion * -1;
+            direction *= -1;
             sprite.flipX = !sprite.flipX;
-
-            // Aquí podrían voltear el SpriteRenderer para que mire al otro lado
         }
     }
 }
