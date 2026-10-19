@@ -1,3 +1,4 @@
+
 using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
@@ -5,17 +6,71 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firePoint;
     [SerializeField] private float bulletSpeed = 12f;
-    void Update()
+    [SerializeField] private Transform weapon;
+
+    private float direction = 1f;
+    private Vector3 weaponStartPosition;
+
+    private void Start()
     {
-        if (Input.GetButtonDown("Fire1")) Shoot();
+        if (weapon != null)
+        {
+            weaponStartPosition = weapon.localPosition;
+        }
     }
+
+    private void Update()
+    {
+        float moveInput = Input.GetAxisRaw("Horizontal");
+
+        if (moveInput > 0)
+        {
+            direction = 1f;
+        }
+        else if (moveInput < 0)
+        {
+            direction = -1f;
+        }
+
+        if (weapon != null)
+        {
+            Vector3 scale = weapon.localScale;
+            scale.x = Mathf.Abs(scale.x) * direction;
+            weapon.localScale = scale;
+
+            weapon.localPosition = new Vector3(
+                Mathf.Abs(weaponStartPosition.x) * direction,
+                weaponStartPosition.y,
+                weaponStartPosition.z
+            );
+        }
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Shoot();
+        }
+    }
+
     private void Shoot()
     {
-        // 1. Instanciamos una copia del Prefab en firePoint
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        // 2. Le asignamos velocidad (ver siguiente diapositiva)
+        Quaternion rotation = direction < 0
+            ? Quaternion.Euler(0f, 180f, 0f)
+            : Quaternion.identity;
+
+        GameObject bullet = Instantiate(
+            bulletPrefab,
+            firePoint.position,
+            rotation
+        );
+
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        float dir = transform.localScale.x >= 0 ? 1f : -1f;
-        rb.linearVelocity = new Vector2(dir * bulletSpeed, 0f);
+
+        if (rb != null)
+        {
+            rb.linearVelocity = new Vector2(
+                direction * bulletSpeed,
+                0f
+            );
+        }
     }
 }
