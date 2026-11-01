@@ -10,9 +10,12 @@ public class PlayerShooting : MonoBehaviour
 
     private float direction = 1f;
     private Vector3 weaponStartPosition;
+    private PlayerDamage playerDamage;
 
     private void Start()
     {
+        playerDamage = GetComponent<PlayerDamage>();
+
         if (weapon != null)
         {
             weaponStartPosition = weapon.localPosition;
@@ -62,6 +65,13 @@ public class PlayerShooting : MonoBehaviour
             firePoint.position,
             rotation
         );
+
+        Projectil projectile = bullet.GetComponent<Projectil>();
+
+        if (projectile != null && playerDamage != null)
+        {
+            projectile.SetDamage(playerDamage.extraDamage);
+        }
 
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
 

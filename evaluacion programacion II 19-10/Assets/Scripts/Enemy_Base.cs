@@ -6,6 +6,13 @@ public class EnemyBase : MonoBehaviour
     public int life = 3;
     public int damage = 10;
 
+    private EnemyLoot enemyLoot;
+
+    private void Start()
+    {
+        enemyLoot = GetComponent<EnemyLoot>();
+    }
+
     public void TakeDamage(int cantidad)
     {
         life -= cantidad;
@@ -18,6 +25,11 @@ public class EnemyBase : MonoBehaviour
 
     private void Die()
     {
+        if (enemyLoot != null)
+        {
+            enemyLoot.DropLoot();
+        }
+
         Destroy(gameObject);
     }
 

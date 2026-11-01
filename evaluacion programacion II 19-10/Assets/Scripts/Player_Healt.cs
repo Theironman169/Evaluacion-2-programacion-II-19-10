@@ -8,6 +8,7 @@ public class PlayerHealth : MonoBehaviour
 
     private int currentHealth;
     private Player_Sounds playerSounds;
+    private bool isDead;
 
     private void Start()
     {
@@ -19,12 +20,15 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if (isDead) return;
+
         if (playerSounds != null)
         {
             playerSounds.PlayHurtSound();
         }
 
         currentHealth -= damage;
+        currentHealth = Mathf.Max(currentHealth, 0);
 
         Debug.Log("Player hit! Remaining health: " + currentHealth);
 
@@ -34,8 +38,19 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    public void Heal(int amount)
+    {
+        if (isDead) return;
+
+        currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
+
+        Debug.Log("Player healed! Current health: " + currentHealth);
+    }
+
     private void Die()
     {
+        isDead = true;
+
         Debug.Log("Player has died! Restarting level...");
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

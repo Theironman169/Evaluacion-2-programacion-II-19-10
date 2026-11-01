@@ -1,3 +1,4 @@
+
 using UnityEngine;
 
 public class Projectil : MonoBehaviour
@@ -5,9 +6,14 @@ public class Projectil : MonoBehaviour
     [SerializeField] private int damage = 10;
     [SerializeField] private float lifeTime = 3f;
 
-    void Start()
+    private void Start()
     {
         Destroy(gameObject, lifeTime);
+    }
+
+    public void SetDamage(int extraDamage)
+    {
+        damage += extraDamage;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
