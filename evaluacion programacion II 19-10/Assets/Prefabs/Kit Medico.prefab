@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7712866233328490593}
   - component: {fileID: 953427500030434709}
   - component: {fileID: 4781751505754893257}
+  - component: {fileID: -343923163978047288}
   m_Layer: 0
   m_Name: Kit Medico
   m_TagString: Untagged
@@ -107,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9f2562ab285f244296946193b778f62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthItem
-  healAmount: 100
+  healAmount: 40
 --- !u!61 &953427500030434709
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -176,3 +177,17 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-343923163978047288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8926358491744309682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed5e2ef5f8bd9a44491d0f97a4bc7aa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemBase
+  pointsReward: 5
+  pickupMessage: "\xA1\xCDtem conseguido!"

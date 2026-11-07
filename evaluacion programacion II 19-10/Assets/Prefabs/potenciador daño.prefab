@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb1c8e53fff394e40b32016f7e42b488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamagePowerUp
-  extraDamage: 5
+  extraDamage: 10
 --- !u!114 &8742064867987830863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,6 +120,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed5e2ef5f8bd9a44491d0f97a4bc7aa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemBase
+  pointsReward: 5
+  pickupMessage: "\xA1\xCDtem conseguido!"
 --- !u!61 &97384566328096039
 BoxCollider2D:
   m_ObjectHideFlags: 0

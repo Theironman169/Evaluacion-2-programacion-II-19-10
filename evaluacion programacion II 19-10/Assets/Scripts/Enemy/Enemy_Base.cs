@@ -1,10 +1,10 @@
-
 using UnityEngine;
 
 public class EnemyBase : MonoBehaviour
 {
     public int life = 3;
     public int damage = 10;
+    public int pointsReward = 100;
 
     private EnemyLoot enemyLoot;
 
@@ -28,6 +28,11 @@ public class EnemyBase : MonoBehaviour
         if (enemyLoot != null)
         {
             enemyLoot.DropLoot();
+        }
+
+        if (ScoreManager.Instance != null)
+        {
+            ScoreManager.Instance.AddPoints(pointsReward);
         }
 
         Destroy(gameObject);

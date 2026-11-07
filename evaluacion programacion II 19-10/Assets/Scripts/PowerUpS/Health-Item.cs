@@ -1,4 +1,3 @@
-
 using UnityEngine;
 
 public class HealthItem : MonoBehaviour
@@ -14,7 +13,6 @@ public class HealthItem : MonoBehaviour
             if (health != null)
             {
                 health.Heal(healAmount);
-                Destroy(gameObject);
             }
         }
     }
