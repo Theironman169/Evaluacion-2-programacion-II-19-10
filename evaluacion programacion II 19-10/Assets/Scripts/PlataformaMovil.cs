@@ -1,4 +1,3 @@
-
 using UnityEngine;
 
 public class PlataformaMovil : MonoBehaviour
@@ -25,8 +24,10 @@ public class PlataformaMovil : MonoBehaviour
             velocidad * Time.deltaTime
         );
 
-        if (Vector3.Distance(transform.position, destinoActual.position) < 0.1f)
+        if (Vector3.Distance(transform.position, destinoActual.position) < 0.05f)
         {
+            transform.position = destinoActual.position;
+
             destinoActual = (destinoActual == puntoA) ? puntoB : puntoA;
         }
     }

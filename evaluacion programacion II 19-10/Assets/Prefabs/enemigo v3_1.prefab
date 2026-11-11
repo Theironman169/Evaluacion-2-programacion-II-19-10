@@ -222,6 +222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBase
   life: 100
   damage: 20
+  pointsReward: 100
 --- !u!114 &3045250341503120689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,9 +346,9 @@ MonoBehaviour:
   projectilePrefab: {fileID: 933329693164036365, guid: 59058556783885d4fa0082f70f5b92c6, type: 3}
   shootingPoint: {fileID: 8889612648473970844}
   projectileSpeed: 5
-  shotsPerBurst: 3
+  shotsPerBurst: 2
   timeBetweenShots: 0.25
-  timeBetweenBursts: 2
+  timeBetweenBursts: 1
   attackRange: 5
   sfxSource: {fileID: 8534888605554202663}
   shootSound: {fileID: 8300000, guid: 843d78bd5afb9c74fa08e36d0f5b98ab, type: 3}
