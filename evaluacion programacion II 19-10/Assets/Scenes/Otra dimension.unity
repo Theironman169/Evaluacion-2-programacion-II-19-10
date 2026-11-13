@@ -173,7 +173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9130633833403237133, guid: 7936f7092ec1d7441ba0d9646cead83b, type: 3}
       propertyPath: nombreDelNivel
-      value: Emprendimiento
+      value: pruebas
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
