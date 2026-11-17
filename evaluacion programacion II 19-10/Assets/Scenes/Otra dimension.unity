@@ -108817,11 +108817,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e4a42bd978ecfb47a47bdea7e209a77, type: 3}
---- !u!82 &586128701 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 2876412950252952363, guid: 8e9f1f713f67d384d86e2e5a3f3a83bd, type: 3}
-  m_PrefabInstance: {fileID: 1512446537}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &640399482
 GameObject:
   m_ObjectHideFlags: 0
@@ -109006,10 +109001,18 @@ PrefabInstance:
     - target: {fileID: 2568428863697549865, guid: 8e9f1f713f67d384d86e2e5a3f3a83bd, type: 3}
       propertyPath: weapon
       value: 
-      objectReference: {fileID: 1914777107}
+      objectReference: {fileID: 0}
     - target: {fileID: 4652610415539482511, guid: 8e9f1f713f67d384d86e2e5a3f3a83bd, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8202989644361459132, guid: 8e9f1f713f67d384d86e2e5a3f3a83bd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -39.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 8202989644361459132, guid: 8e9f1f713f67d384d86e2e5a3f3a83bd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.4
       objectReference: {fileID: 0}
     - target: {fileID: 8391255706272066367, guid: 8e9f1f713f67d384d86e2e5a3f3a83bd, type: 3}
       propertyPath: jumpSound
@@ -109018,7 +109021,7 @@ PrefabInstance:
     - target: {fileID: 8391255706272066367, guid: 8e9f1f713f67d384d86e2e5a3f3a83bd, type: 3}
       propertyPath: sfxSource
       value: 
-      objectReference: {fileID: 586128701}
+      objectReference: {fileID: 0}
     - target: {fileID: 8795706433811156923, guid: 8e9f1f713f67d384d86e2e5a3f3a83bd, type: 3}
       propertyPath: m_LocalPosition.x
       value: -41.48
@@ -109064,11 +109067,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e9f1f713f67d384d86e2e5a3f3a83bd, type: 3}
---- !u!4 &1914777107 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3145968553485466993, guid: 8e9f1f713f67d384d86e2e5a3f3a83bd, type: 3}
-  m_PrefabInstance: {fileID: 1512446537}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
