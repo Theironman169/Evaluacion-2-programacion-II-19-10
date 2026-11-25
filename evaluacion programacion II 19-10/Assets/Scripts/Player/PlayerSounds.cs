@@ -8,14 +8,6 @@ public class Player_Sounds : MonoBehaviour
     public AudioClip shootSound;
     public AudioClip hurtSound;
 
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            PlayShootSound();
-        }
-    }
-
     public void PlayShootSound()
     {
         if (sfxSource != null && shootSound != null)

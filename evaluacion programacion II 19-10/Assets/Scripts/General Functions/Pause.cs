@@ -1,8 +1,11 @@
+
 using UnityEngine;
 
 public class PauseManager : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenuUI;
+    [SerializeField] private GameObject player;
+
     private bool isPaused = false;
 
     void Update()
@@ -19,14 +22,22 @@ public class PauseManager : MonoBehaviour
     public void PauseGame()
     {
         Time.timeScale = 0f;
-        if (pauseMenuUI != null) pauseMenuUI.SetActive(true);
+        player.SetActive(false);
+
+        if (pauseMenuUI != null)
+            pauseMenuUI.SetActive(true);
+
         isPaused = true;
     }
 
     public void ResumeGame()
     {
         Time.timeScale = 1f;
-        if (pauseMenuUI != null) pauseMenuUI.SetActive(false);
+        player.SetActive(true);
+
+        if (pauseMenuUI != null)
+            pauseMenuUI.SetActive(false);
+
         isPaused = false;
     }
 }

@@ -11,10 +11,12 @@ public class PlayerShooting : MonoBehaviour
     private float direction = 1f;
     private Vector3 weaponStartPosition;
     private PlayerDamage playerDamage;
+    private Player_Sounds playerSounds;
 
     private void Start()
     {
         playerDamage = GetComponent<PlayerDamage>();
+        playerSounds = GetComponent<Player_Sounds>();
 
         if (weapon != null)
         {
@@ -27,13 +29,9 @@ public class PlayerShooting : MonoBehaviour
         float moveInput = Input.GetAxisRaw("Horizontal");
 
         if (moveInput > 0)
-        {
             direction = 1f;
-        }
         else if (moveInput < 0)
-        {
             direction = -1f;
-        }
 
         if (weapon != null)
         {
@@ -65,6 +63,9 @@ public class PlayerShooting : MonoBehaviour
             firePoint.position,
             rotation
         );
+
+        if (playerSounds != null)
+            playerSounds.PlayShootSound();
 
         Projectil projectile = bullet.GetComponent<Projectil>();
 

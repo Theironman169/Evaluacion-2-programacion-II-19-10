@@ -1,3 +1,4 @@
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -6,6 +7,7 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private int maxHealth = 100;
     [SerializeField] private Slider healthBar;
+    [SerializeField] private GameObject gameOverPanel;
 
     private int currentHealth;
     private Player_Sounds playerSounds;
@@ -20,7 +22,7 @@ public class PlayerHealth : MonoBehaviour
         healthBar.maxValue = maxHealth;
         healthBar.value = currentHealth;
 
-        Debug.Log("Player starting health: " + currentHealth);
+        gameOverPanel.SetActive(false);
     }
 
     public void TakeDamage(int damage)
@@ -28,21 +30,15 @@ public class PlayerHealth : MonoBehaviour
         if (isDead) return;
 
         if (playerSounds != null)
-        {
             playerSounds.PlayHurtSound();
-        }
 
         currentHealth -= damage;
         currentHealth = Mathf.Max(currentHealth, 0);
 
         healthBar.value = currentHealth;
 
-        Debug.Log("Player hit! Remaining health: " + currentHealth);
-
         if (currentHealth <= 0)
-        {
             Die();
-        }
     }
 
     public void Heal(int amount)
@@ -50,16 +46,19 @@ public class PlayerHealth : MonoBehaviour
         if (isDead) return;
 
         currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
-
         healthBar.value = currentHealth;
-
-        Debug.Log("Player healed! Current health: " + currentHealth);
     }
 
     private void Die()
     {
         isDead = true;
-        Debug.Log("Player has died! Restarting level...");
+        gameOverPanel.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
+    public void RestartLevel()
+    {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
